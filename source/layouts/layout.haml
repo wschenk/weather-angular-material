@@ -1,0 +1,17 @@
+!!! 5
+%html.no-js.sticky
+  %head
+    %meta{ :charset => 'utf-8' }/
+    %meta{ 'http-equiv' => 'X-UA-Compatible', :content => 'IE=edge,chrome=1' }/
+
+    = auto_display_meta_tags
+
+    %meta{ :name => 'description', :content => '' }/
+    %meta{ :name => 'viewport', :content => 'initial-scale=1, maximum-scale=1, user-scalable=no' }/
+
+    = stylesheet_link_tag 'application'
+
+  %body{ "ng-app" => "WeatherApp" }
+    ~ yield
+
+    = partial "layouts/javascripts"

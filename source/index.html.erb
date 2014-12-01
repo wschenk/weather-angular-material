@@ -1,0 +1,43 @@
+---
+title: Welcome to Happy Seeds Static Site
+---
+<div ng-controller="WeatherCntl">
+  <md-toolbar md-scroll-shrink>
+    <div class="md-toolbar-tools">
+      <span>Angular Material Weather App</span>
+      <!-- fill up the space between left and right area -->
+      <span flex></span>
+      <md-button ng-click="findLocation()">
+        Find Location
+      </md-button>
+      <md-button ng-click="showAbout()">
+        About
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-content>
+    <div layout="row" layout-align="center">
+      <md-text-float label="Location" ng-model="location" ng-change="lookupLocation()"></md-text-float>
+      <div style="padding: 1.2em">
+        <md-button class="md-raised md-primary" ng-click="lookupLocation()">Lookup</md-button>
+      </div>
+    </div>
+  </md-content>
+
+  <h3 ng-show="working" style="text-align: center">{{ status }}</h3>
+  <md-progress-linear md-mode="indeterminate" ng-show="working"></md-progress-linear>
+
+  <md-content>
+    <md-card ng-repeat="report in reports">
+      <div layout="row" style="font-size: 4em">
+        <span>Weather for {{ report.data.name }} {{ report.data.sys.country }}</span>
+        <span flex></span>
+        <weather-icon code="{{ report.weather.id }}"></weather-icon>
+      </div>
+
+      <p>{{ report.lat }} / {{ report.lng }}</p>
+      <pre>{{ report.data }}</pre>
+    </md-card>
+  </md-content>
+</div>

@@ -1,0 +1,16 @@
+<%= javascript_include_tag "angular/angular", 
+  "angular-aria/angular-aria",
+  "angular-animate/angular-animate",
+  "hammerjs/hammer",
+  "angular-material/angular-material",
+  "angular-route/angular-route",
+  "all"
+ %>
+<script type="text/javascript">
+<% if config.environment == :build && data['site']['google_analytics_id'] %>
+  var _gaq=[['_setAccount','<%= data['site']['google_analytics_id'] %>'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+<% end %>
+</script>
