@@ -2,3 +2,23 @@
 #= include "angular-material/themes/blue-theme"
 #= include "angular-material/themes/light-blue-dark-theme"
 #= include "weather-icons/css/weather-icons.min"
+
+.title {
+  padding-top: 8px;
+  padding-right: 8px;
+  text-align: left;
+  text-transform: uppercase;
+  color: #888;
+  margin-top: 24px;
+}
+
+.weather {
+  text-align: center;
+  i {
+    font-size: 100px;
+  }
+
+  p {
+    font-size: 2em;
+  }
+}

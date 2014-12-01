@@ -108,6 +108,7 @@ DialogController = ($scope, $mdDialog) ->
 app.controller "WeatherCntl", ( $scope, $mdToast, $mdDialog, Location, Weather ) ->
   $scope.reports = []
   $scope.location = ""
+  $scope.tabs = [{title: "First"},{title: "Second"}]
 
   new_report = (lat, lng) ->
     report = {lat: lat, lng: lng}
@@ -115,6 +116,8 @@ app.controller "WeatherCntl", ( $scope, $mdToast, $mdDialog, Location, Weather )
       console.log data
       report.data = data
       report.weather = data['weather'][0]
+      report.selectedIndex = 0
+
     
     $scope.reports.push(report)
 
@@ -128,6 +131,7 @@ app.controller "WeatherCntl", ( $scope, $mdToast, $mdDialog, Location, Weather )
       report.weather = data['weather'][0]
       report.lat = data.coord.lat
       report.lng = data.coord.lon
+      report.selectedIndex = 0
       console.log report.weather
 
     $scope.reports.push( report )
@@ -136,6 +140,11 @@ app.controller "WeatherCntl", ( $scope, $mdToast, $mdDialog, Location, Weather )
     Location.location().then (data) ->
       $scope.location = data
       new_report( data['lat'], data['lng'] )
+
+  $scope.find_forecast = (report) ->
+    console.log "Hello"
+    console.log report
+    report.selectedIndex = this.$index
 
   $scope.showAbout = (ev) ->
     $mdDialog.show

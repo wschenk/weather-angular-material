@@ -1,5 +1,5 @@
 ---
-title: Welcome to Happy Seeds Static Site
+title: The Angular Material Weather App
 ---
 <div ng-controller="WeatherCntl">
   <md-toolbar md-scroll-shrink>
@@ -16,28 +16,87 @@ title: Welcome to Happy Seeds Static Site
     </div>
   </md-toolbar>
 
-  <md-content>
-    <div layout="row" layout-align="center">
-      <md-text-float label="Location" ng-model="location" ng-change="lookupLocation()"></md-text-float>
-      <div style="padding: 1.2em">
-        <md-button class="md-raised md-primary" ng-click="lookupLocation()">Lookup</md-button>
-      </div>
+  <md-content layout-padding layout="vertical" layout-align="center">
+    <span class="title">Enter a city, country</span>
+    <md-text-float label="Location" ng-model="location" ng-change="lookupLocation()"></md-text-float>
+    <div style="padding: 1.2em">
+      <md-button class="md-raised md-primary" ng-click="lookupLocation()">Lookup</md-button>
     </div>
   </md-content>
 
-  <h3 ng-show="working" style="text-align: center">{{ status }}</h3>
-  <md-progress-linear md-mode="indeterminate" ng-show="working"></md-progress-linear>
+  <div style="margin-top: 50px">
+    <h3 ng-show="working" style="text-align: center">{{ status }}</h3>
+    <md-progress-linear md-mode="indeterminate" ng-show="working"></md-progress-linear>
+  </div>
 
-  <md-content>
-    <md-card ng-repeat="report in reports">
-      <div layout="row" style="font-size: 4em">
-        <span>Weather for {{ report.data.name }} {{ report.data.sys.country }}</span>
-        <span flex></span>
-        <weather-icon code="{{ report.weather.id }}"></weather-icon>
-      </div>
+  <div ng-repeat="report in reports">
+    <md-content layout="horizontal" layout-align="center">
+      <md-card flex="50">
+        <md-tabs>
+          <md-tab label="Current" on-select="find_forecast( report );">
+            <div ng-class="tab.style" layout-fill layout="horizontal" layout-align="center">
+              <div flex="33" class="weather">
+                <weather-icon code="{{ report.weather.id }}"></weather-icon>
+                <p>{{ report.weather.description }}</p>
+              </div>
+              <div flex class="where">
+                <h1>Weather for {{ report.data.name }} {{ report.data.sys.country }}</h1>
 
-      <p>{{ report.lat }} / {{ report.lng }}</p>
-      <pre>{{ report.data }}</pre>
-    </md-card>
-  </md-content>
+                <div layout="horizontal">
+                  <div flex="50">
+                    <table flex layout-padding>
+                      <tr><th>Low</th><td>{{ report.data.main.temp_min }} Degrees</td></tr>              
+                      <tr><th>Current</th><td>{{ report.data.main.temp }} Degrees</td></tr>              
+                      <tr><th>High</th><td>{{ report.data.main.temp_max }} Degrees</td></tr>              
+                      <tr><th>Pressure</th><td>{{ report.data.main.humidity }} Bars</td></tr>              
+                    </table>
+                  </div>
+
+                  <div flex>
+                    <table flex layout-padding>
+                      <tr><th>Wind</th><td>{{ report.data.wind.speed }}</td></tr>
+                      <tr><th>Gusts</th><td>{{ report.data.wind.gust }}</td></tr>
+                      <tr><th>Direction</th><td>{{ report.data.wind.deg }}</td></tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </md-tab>
+
+
+          <md-tab label="Forecast" on-select="find_forecast( report );">
+            <div  ng-class="tab.style" layout-fill layout="horizontal" layout-align="center">
+              <div flex="33" class="weather">
+                <weather-icon code="{{ report.weather.id }}"></weather-icon>
+                <p>{{ report.weather.description }}</p>
+              </div>
+              <div flex class="where">
+                <h1>Weather for {{ report.data.name }} {{ report.data.sys.country }}</h1>
+
+                <div layout="horizontal">
+                  <div flex="50">
+                    <table flex layout-padding>
+                      <tr><th>Low</th><td>{{ report.data.main.temp_min }} Degrees</td></tr>              
+                      <tr><th>Current</th><td>{{ report.data.main.temp }} Degrees</td></tr>              
+                      <tr><th>High</th><td>{{ report.data.main.temp_max }} Degrees</td></tr>              
+                      <tr><th>Pressure</th><td>{{ report.data.main.humidity }} Bars</td></tr>              
+                    </table>
+                  </div>
+
+                  <div flex>
+                    <table flex layout-padding>
+                      <tr><th>Wind</th><td>{{ report.data.wind.speed }}</td></tr>
+                      <tr><th>Gusts</th><td>{{ report.data.wind.gusts }}</td></tr>
+                      <tr><th>Direction</th><td>{{ report.data.wind.deg }}</td></tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </md-tab>
+        </md-tabs>
+      </md-card>
+    </md-content>
+  </div>
 </div>
