@@ -1,0 +1,93 @@
+var lookup_codes;
+
+lookup_codes = {
+  200: 'storm-showers',
+  201: 'thunderstorm',
+  202: 'thunderstorm',
+  210: 'storm-showers',
+  211: 'thunderstorm',
+  212: 'thunderstorm',
+  221: 'thunderstorm',
+  230: 'storm-showers',
+  231: 'storm-showers',
+  232: 'thunderstorm',
+  300: 'sprinkles',
+  301: "sprinkles",
+  302: "sprinkle",
+  310: "showers",
+  311: "showers",
+  312: "showers",
+  313: "showers",
+  314: "showers",
+  321: "showers",
+  500: "rain",
+  501: "rain",
+  502: "rain",
+  503: "rain",
+  504: "rain-mix",
+  511: "rain-mix",
+  520: "rain-mix",
+  521: "rain-mix",
+  522: "rain-mix",
+  531: "rain-mix",
+  600: "snow",
+  601: "snow",
+  602: "snow",
+  611: "hail",
+  612: "hail",
+  615: "hail",
+  616: "rain-mix",
+  620: "rain-mix",
+  621: "snow",
+  622: "snow",
+  701: "fog",
+  711: "smoke",
+  721: "dust",
+  731: "dust",
+  741: "fog",
+  751: "dust",
+  761: "dust",
+  762: "strong-wind",
+  771: "tornado",
+  781: "tornado",
+  800: "day-sunny",
+  801: "day-cloudy",
+  802: "day-sunny-overcast",
+  803: "day-sunny-overcast",
+  804: "day-sunny-overcast",
+  900: "tornado",
+  901: "hurricane",
+  902: "hurricane",
+  903: "snowflake-cold",
+  904: "hot",
+  905: "windy",
+  906: "hail",
+  951: "moon-full",
+  952: "fog",
+  953: "fog",
+  954: "fog",
+  955: "cloudy-windy",
+  956: "cloudy-gusts",
+  957: "strong-wind",
+  958: "cloud-refresh",
+  959: "cloud-refresh",
+  960: "tornado",
+  961: "tornado",
+  962: "hurricane"
+};
+
+app.directive('weatherIcon', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    scope: {
+      code: '@'
+    },
+    template: '<i class="wi wi-{{ key }}"></i>',
+    controller: function($scope) {
+      return $scope.$watch("code", function(new_val, old_val) {
+        return $scope.key = lookup_codes[new_val];
+      });
+    }
+  };
+});

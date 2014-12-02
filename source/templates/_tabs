@@ -1,0 +1,18 @@
+<md-content layout="vertical" layout-align="center">
+  <md-card flex="50" layout-margin="0" ng-controller="WeatherStationCntl">
+    <md-tabs md-selected="t.selectedIndex">
+      <md-tab label="First"></md-tab>
+      <md-tab label="Second"></md-tab>
+    </md-tabs>
+    {{ selectedIndex }}
+    <ng-switch on="t.selectedIndex" class="tabpanel-container">
+      <div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
+        <p layout-padding>First tab</p>
+      </div>
+
+      <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
+        <p layout-padding>Second tab</p>
+      </div>
+    </ng-switch>
+  </md-card>
+</md-content>
